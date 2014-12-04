@@ -21,3 +21,12 @@ func Min(x, y float32) float32 {
 	} 
 	return y
 }
+
+func Clamp(x, mi, ma float32) float32 {
+	if x < mi {
+		return mi
+	} else if x > ma {
+		return ma
+	}
+	return x
+}

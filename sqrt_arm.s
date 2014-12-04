@@ -4,3 +4,6 @@
 
 TEXT ·Sqrt(SB),NOSPLIT,$0
 	B ·sqrt(SB)
+
+TEXT ·Rqrt(SB),NOSPLIT,$0
+	B ·rsqrt(SB)

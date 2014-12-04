@@ -11,8 +11,12 @@ TEXT ·Sqrt(SB),NOSPLIT,$0
 	RET
 
 // This is the fast RSQRTSS approximation refined with one Newton-Raphson iteration
-// 	r := Rsqrt(x)
-//	return r * (1.5 - (0.5 * x * r * r))
+// http://nume.googlecode.com/svn/trunk/fosh/src/sse_approx.h
+// http://en.wikipedia.org/wiki/Fast_inverse_square_root
+//
+// r := Rsqrt(x)
+// return 0.5 * r * (3 - x * r * r)
+//
 // func Rsqrt(x float32) float32
 TEXT ·Rsqrt(SB),NOSPLIT,$0
 	MOVSS  	x+0(FP), X0
@@ -20,10 +24,10 @@ TEXT ·Rsqrt(SB),NOSPLIT,$0
 	MOVSS 	X1, X2	
 	MULSS 	X1, X1
 	MULSS 	X0, X1
-	MULSS	$(0.5), X1
-	MOVSS   $(1.5), X0
+	MOVSS   $(3.0), X0
 	SUBSS	X1, X0
 	MULSS	X0, X2
+	MULSS	$(0.5), X2
 	MOVSS 	X2, ret+8(FP)
 	RET
 
@@ -34,11 +38,10 @@ TEXT ·FastSqrt(SB),NOSPLIT,$0
 	MOVSS 	X1, X2	
 	MULSS 	X1, X1
 	MULSS 	X0, X1
-	MULSS	$(0.5), X1
-	MOVSS   $(1.5), X3
+	MOVSS   $(3.0), X3
 	SUBSS	X1, X3
 	MULSS	X3, X2
-	MULSS	X2, X0
-	MOVSS 	X0, ret+8(FP)
+	MULSS	$(0.5), X2
+	MULSS	X0, X2
+	MOVSS 	X2, ret+8(FP)
 	RET
-	

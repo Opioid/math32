@@ -7,3 +7,4 @@
 // func Floor(x float32) float32
 TEXT ·Floor(SB),NOSPLIT,$0
 	JMP ·floor(SB)
+	

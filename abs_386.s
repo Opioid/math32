@@ -6,7 +6,7 @@
 
 // func Abs(x float32) float32
 TEXT ·Abs(SB),NOSPLIT,$0
-	FMOVF   x+0(FP), F0  // F0=x
-	FABS                 // F0=|x|
-	FMOVFP  F0, ret+8(FP)
+	FMOVF	x+0(FP), F0		// F0=x
+	FABS					// F0=|x|
+	FMOVFP	F0, ret+4(FP)
 	RET

@@ -15,7 +15,7 @@ func sqrt(x float32) float32 {
 func Rsqrt(x float32) float32
 
 func rsqrt(x float32) float32 {
-	return 1 / sqrt(x)
+	return 1.0 / Sqrt(x)
 }
 
 func FastSqrt(x float32) float32

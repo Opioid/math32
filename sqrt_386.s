@@ -6,7 +6,12 @@
 
 // func Sqrt(x float32) float32
 TEXT ·Sqrt(SB),NOSPLIT,$0
-	FMOVS   x+0(FP),F0
+	FMOVF	x+0(FP),F0
 	FSQRT
-	FMOVSP  F0,ret+8(FP)
+	FMOVFP	F0,ret+4(FP)
 	RET
+
+// func Rsqrt(x float32) float32
+TEXT ·Rsqrt(SB),NOSPLIT,$0
+	JMP ·rsqrt(SB)
+	

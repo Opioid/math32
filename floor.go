@@ -14,7 +14,10 @@ func floor(x float32) float32 {
 
 func Floor2(x, y float32) (float32, float32)
 
-
 func PlainFloor2(x, y float32) (float32, float32) {
 	return Floor(x), Floor(y)
+}
+
+func Ceil(x float32) float32 {
+	return float32(math.Ceil(float64(x)))
 }
